@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>My page</div><br>
+    <div id="user"></div><br>
+    <input type="button" id="sender" value="SendData" />
+    <a href="/t5">Task 5</a>
+<script>
+    document.getElementById("sender").addEventListener("click", send);
+    async function send() {
+        const response = await fetch("/user", {
+            method: "POST",
+            headers: { "Accept": "application/json", "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: "Ivan", second_name: "Ivanovych", surname:"Petrenko"
+            }),
+        });
+        const message = await response.json();
+        document.getElementById("user").textContent = message.text;
+    }
+
+</script>
+</body>
+</html>
