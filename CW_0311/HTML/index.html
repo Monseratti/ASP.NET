@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table, th, td {
+            border-collapse: collapse;
+            border: 1px solid black;
+            padding: 10px;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div>Hello. Car saloon=)</div>
+    <br /><br />
+    <div class="container">
+        <input type="hidden" id="id"/>
+        <input type="text" id="mark" placeholder="Mark"/>
+        <input type="text" id="model" placeholder="Model"/>
+        <input type="text" id="color" placeholder="Color"/>
+        <input type="number" id="year" placeholder="Year" max="2022" min="2005"/>
+        <button id="btn">Send data</button>
+        <button onclick="resetData()">Clear data</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Mark</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Year</th>
+                <th>Controls</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        //get all
+        function addRow(obj) {
+            let trow = document.createElement("tr");
+            trow.setAttribute("data-rowid", obj.id);
+            //add mark
+            let td = document.createElement("td");
+            td.innerHTML = `${obj.mark}`;
+            trow.appendChild(td);
+            //add model
+            td = document.createElement("td");
+            td.innerHTML = `${obj.model}`;
+            trow.appendChild(td);
+            //add color
+            td = document.createElement("td");
+            td.innerHTML = `${obj.color}`;
+            trow.appendChild(td);
+            //add year
+            td = document.createElement("td");
+            td.innerHTML = `${obj.year}`;
+            trow.appendChild(td);
+            //add controls
+            //add edit
+            td = document.createElement("td");
+            let buttonEdit = document.createElement("button");
+            buttonEdit.innerText = "Edit";
+            buttonEdit.addEventListener("click", async () => {
+                await getAuto(obj.id);
+            })
+            td.appendChild(buttonEdit);
+            //add delete
+            let buttonDelete = document.createElement("button");
+            buttonDelete.innerText = "Delete";
+            buttonDelete.addEventListener("click", async () => {
+                await delAuto(obj.id);
+            })
+            td.appendChild(buttonDelete);
+            trow.appendChild(td);
+            return trow;
+        }
+        async function getAllAuto() {
+            const response = await fetch("/api/autos", {
+                method: "GET",
+                headers: { "Accept": "application/json"}
+            });
+            if (response.ok) {
+                let autos = await response.json();
+                let table = document.getElementsByTagName("tbody")[0];
+
+                for (let el of autos) {
+                    table.append(addRow(el));
+                }
+            };
+        }
+        getAllAuto();
+        //end get all
+
+        //add/edit element
+        document.getElementById("btn").addEventListener("click", async () => {
+            if (document.getElementById("id").value == "") {
+                await createEditCar(document.getElementById("mark"),
+                    document.getElementById("model"),
+                    document.getElementById("color"),
+                    document.getElementById("year"))
+            }
+            else {
+                await createEditCar(document.getElementById("mark"),
+                    document.getElementById("model"),
+                    document.getElementById("color"),
+                    document.getElementById("year"),
+                    document.getElementById("id")
+                )
+            }
+        });
+        function resetData(id = null, mark = null, model = null, color = null, year = null) {
+            document.getElementById("id").value = id;
+            document.getElementById("mark").value = mark;
+            document.getElementById("model").value = model;
+            document.getElementById("color").value = color;
+            document.getElementById("year").value = year;
+        }
+        async function createEditCar(mark, model, color, year, id = null) {
+            let obj;
+            if (id == null) {
+                obj = {
+                    mark: `${mark.value}`,
+                    model: `${model.value}`,
+                    color: `${color.value}`,
+                    year: `${year.value}`,
+                }
+            }
+            else {
+                obj = {
+                    id: `${id.value}`,
+                    mark: `${mark.value}`,
+                    model: `${model.value}`,
+                    color: `${color.value}`,
+                    year: `${year.value}`,
+                }
+            }
+            const response = await fetch("/api/autos", {
+                method: `${id==null?"POST":"PUT"}`,
+                headers: { "Accept": "application/json", "Content-type":"application/json" },
+                body: JSON.stringify(obj),
+            });
+            if (response.ok) {
+                let auto = await response.json();
+                console.log(auto);
+                if (id == null) {
+                    document.getElementsByTagName("tbody")[0].appendChild(addRow(auto));
+                }
+                else {
+                    document.getElementsByTagName("tbody")[0].innerHTML = "";
+                    auto.forEach((el) => {
+                        document.getElementsByTagName("tbody")[0].appendChild(addRow(el));
+                    })
+                }
+                resetData();
+            }
+            else {
+                let message = await response.json();
+                alert(message.text);
+            }
+        }
+       
+        //end add/edit element
+
+        //edit(get one)
+        async function getAuto(id) {
+
+            const response = await fetch(`/api/autos/${id}?${new URLSearchParams({id: id})}`, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok) {
+                let auto = await response.json();
+                resetData(auto.id, auto.mark, auto.model, auto.color, auto.year);
+            };
+        }
+        //end edit(get one)
+
+        //delete element
+        async function delAuto(id) {
+            const response = await fetch(`/api/autos/${id}?${new URLSearchParams({ id: id })}`, {
+                method: "DELETE",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok) {
+                let answer = await response.json();
+                if (answer.deleted) {
+                    document.getElementsByTagName("tbody")[0].innerHTML = "";
+                    getAllAuto();
+                }
+            };
+        }
+        //end delete element
+
+    </script>
+</body>
+</html>
