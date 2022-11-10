@@ -1,0 +1,15 @@
+﻿@page
+@model CW_0811.Pages.Task2Model
+@{
+}
+<form asp-page-handler="BySelect">
+	<input  type="text" name="country" />
+	<button type="submit">Submit</button>
+</form>
+
+<ul>
+	@foreach(string contry in Model.DisplayedCountries)
+	{
+		<li>@contry</li>
+	}
+</ul>

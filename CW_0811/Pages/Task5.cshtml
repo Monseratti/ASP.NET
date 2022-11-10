@@ -1,0 +1,22 @@
+﻿@page
+@model CW_0811.Pages.Task5Model
+@{
+}
+<form class="d-flex flex-column text-start w-50">
+	<input name="name" type="text" placeholder="Name" />
+	<input inputmode="tel" name="phone" id="phone" type="tel" placeholder="Phone" />
+	<textarea name="message" placeholder="Message"></textarea>
+	<button>Send</button>
+</form>
+@if (Model.Name != null)
+{
+	<p>From: @Model.Name</p>
+	<p>Phone: @Model.Phone</p>
+	<p>Message: @Model.Message</p>
+}
+
+<script>
+	$(document).ready(function () {
+		$("#phone").mask("+3(999)999 99-99");
+	});
+</script>

@@ -1,0 +1,19 @@
+﻿@page
+@model CW_0811.Pages.Task3_4_1Model
+@{
+}
+
+<form asp-page-handler="Confirm" method="post">
+	<input type="text" name="login" />
+	<input type="password" name="pass" />
+	<button>Login</button>
+</form>
+@if (Model.isConfirm == false)
+{
+	<p>Some errors. Please try again or 
+		<a asp-page="@Url.Page("Task3_4_2")">registration</a></p>
+}
+else if (Model.isConfirm == true)
+{
+	<b>Home</b>
+}

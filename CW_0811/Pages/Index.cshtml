@@ -4,7 +4,11 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <ul>
+        <li><a asp-page="@Url.Page("Task1")">Task 1</a></li>
+        <li><a asp-page="@Url.Page("Task2")">Task 2</a></li>
+        <li><a asp-page="@Url.Page("Task3_4_1")">Task 3,4</a></li>
+        <li><a asp-page="@Url.Page("Task5")">Task 5</a></li>
+    </ul>
 </div>

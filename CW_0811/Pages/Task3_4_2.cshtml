@@ -1,0 +1,31 @@
+﻿@page
+@model CW_0811.Pages.Task3_4_2Model
+@{
+}
+<form class="d-flex flex-column w-50 text-start">
+	<div>
+		<input asp-for="Login" name="login" type="text" placeholder="Login" />
+		<span asp-validation-for="Login"></span>
+	</div>
+	<div>
+		<input asp-for="Password" name="pass" type="password" placeholder="Password" />
+		<span asp-validation-for="Password"></span>
+	</div>
+	<div>
+		<input asp-for="ConfPassword"  name="passConf" type="password" placeholder="Confirm Password" />
+		<span asp-validation-for="ConfPassword"></span>
+	</div>
+	<div>
+		<input asp-for="Email" name="email" type="email" placeholder="Email" />
+		<span asp-validation-for="Email"></span>
+	</div>
+	<div>
+		<input asp-for="Phone"  name="phone" type="tel" placeholder="Phone" />
+		<span asp-validation-for="Phone"></span>
+	</div>
+	<button>Register</button>
+</form>
+
+@section scripts{
+	<partial name="_ValidationScriptsPartial" />
+    }
