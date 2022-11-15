@@ -1,0 +1,23 @@
+﻿@page "{score}"
+@model HW_0811_HW1_.Pages.Task2_1Model
+@{
+}
+<b>You score now: @Model.Score</b>
+<form method="post">
+	<input type="hidden" value="@Model.Score" name="scoreNow"/>
+	@for(int i = 0; i<Model.RandomsIndex.Count; i++)
+	{
+		var question = Model.Questions[Model.RandomsIndex[i]];
+		<label class="fw-bold">@question.QQ</label>
+		<div class="d-flex flex-row mb-3">
+			@{
+				var countAnsw = 0;
+			}
+			@foreach (var key in question.Answers)
+			{
+				<label class="me-3"><input type="checkbox" value="@key.Value" name="@question.QQ@(++countAnsw)" />@key.Key</label>
+			}
+			</div>
+	}
+	<button>Next</button>
+</form>

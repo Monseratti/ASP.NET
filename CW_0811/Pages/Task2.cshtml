@@ -10,6 +10,14 @@
 <ul>
 	@foreach(string contry in Model.DisplayedCountries)
 	{
+		if (Model.Country!=null)
+		{
+			int iter = contry.ToLower().IndexOf(Model.Country.ToLower());
+			<li>@contry.Substring(0, iter)<b style="color:red">@contry.Substring(iter, Model.Country.Length)</b>@contry.Substring(iter+Model.Country.Length)</li>
+		}
+		else
+		{
 		<li>@contry</li>
+		}
 	}
 </ul>

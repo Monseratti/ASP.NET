@@ -1,0 +1,19 @@
+﻿@page "{score}"
+@model HW_0811_HW1_.Pages.Task2_2Model
+@{
+}
+<b>You score now: @Model.Score</b>
+<form method="post">
+	<input type="hidden" name="scoreNow" value="@Model.Score" />
+	@foreach (Question question in Model.Questions)
+	{
+			<label class="fw-bold">@question.QQ</label>
+		<div class="d-flex flex-row mb-3">
+			@foreach (var key in question.Answers)
+			{
+				<input type="text" placeholder="Answer..." name="@question.QQ" />
+			}
+			</div>
+	}
+	<button>Finish</button>
+</form>

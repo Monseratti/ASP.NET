@@ -1,0 +1,17 @@
+﻿@page
+@model HW_0811_HW1_.Pages.Task2Model
+@{
+}
+<form method="post">
+	@foreach (Question question in Model.Questions)
+	{
+		<label class="fw-bold">@question.QQ</label>
+		<div class="d-flex flex-row mb-3">
+			@foreach(var key in question.Answers)
+			{
+				<label class="me-3"><input type="radio" value="@key.Value" name="@question.QQ" />@key.Key</label>
+			}
+		</div>
+	}
+	<button>Next</button>
+</form>

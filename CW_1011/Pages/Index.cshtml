@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form class="text-start w-50" asp-page-handler="Added">
+    <label>Name: <input name="productName" type="text" /></label>
+    <label> Price: <input name="productPrice" type="text" id="price" /></label>
+    <button>Add</button>
+</form>
+<hr />
+<ul>
+@foreach(Product product in Model.Products){
+    <li>@product</li>
+}
+</ul>
+<hr />  
+<form class="text-start w-50" asp-page-handler="Search">
+    <label>Name: <input name="productName" type="text" /></label>
+    <button>Search</button>
+</form>
+<hr />
+@if (Model.SearchProducts != null)
+{   
+    foreach (Product product in Model.SearchProducts)
+    {
+        <li>@product</li>
+    }
+}
+
+
+
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" 
+    integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(()=>{
+            $("#price").mask("99999,99");
+        })
+    </script>
+}
