@@ -29,6 +29,52 @@
     }
 }
 
+<hr />
+<form class="text-start w-50" asp-page-handler="CreateCategory">
+    <div class="d-flex flex-row">
+    <label>Name: <input name="categoriesName" type="text" /></label>
+    <button>Save</button>
+    </div>
+    <div class="d-flex flex-column">
+        @foreach(Product pr in Model.Products){
+            if (pr.Category == null)
+            {   
+                <label class="me-2"><input type="checkbox" name="@pr.Name" value="@pr.Name" /><b>@pr.Name</b></label>
+            }
+        }    
+    </div>
+</form>
+<hr />
+@if (Model.Categories != null)
+{
+    foreach (Category category in Model.Categories)
+    {
+        <li>@category.getCategoryName()</li>
+    }
+}
+
+<hr />
+<form class="text-start w-50" asp-page-handler="SearchCategory">
+    <div class="d-flex flex-row">
+        <label>Name:<select name="selectCategory">
+                @if (Model.Categories != null){
+                    foreach(Category category in Model.Categories){
+                        <option value="@category.getCategoryName()">@category.getCategoryName()</option>
+                    }
+                }
+        </select> </label>
+        <button>Select</button>
+    </div>
+</form>
+<hr />
+@if (Model.SearchCategories != null)
+{
+    foreach (Category category in Model.SearchCategories)
+    {
+        <li>@category.getCategoryName()</li>
+    }
+}
+
 
 
 @section scripts {

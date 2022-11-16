@@ -32,3 +32,4 @@ D:\Studies\ASP.NET\CW_1011\obj\Debug\net6.0\ref\CW_1011.dll
 D:\Studies\ASP.NET\CW_1011\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\Studies\ASP.NET\CW_1011\obj\Debug\net6.0\CW_1011.csproj.CopyComplete
 D:\Studies\ASP.NET\CW_1011\bin\Debug\net6.0\Products.json
+D:\Studies\ASP.NET\CW_1011\bin\Debug\net6.0\categories.json

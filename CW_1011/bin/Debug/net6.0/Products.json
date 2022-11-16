@@ -1,1 +1,22 @@
-[{"Name":"Glovo","Price":124.11},{"Name":"React","Price":1453.12},{"Name":"Asp","Price":542.33}]
+[
+  {
+    "Name": "tmp",
+    "Price": 10.23,
+    "Category": null
+  },
+  {
+    "Name": "tmp2",
+    "Price": 63.45,
+    "Category": null
+  },
+  {
+    "Name": "test",
+    "Price": 425.33,
+    "Category": null
+  },
+  {
+    "Name": "Rose",
+    "Price": 1254.11,
+    "Category": null
+  }
+]

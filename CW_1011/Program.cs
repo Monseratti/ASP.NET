@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -29,15 +31,38 @@ public class Product
 {
 	public string Name { get; set; }
 	public decimal Price { get; set; }
+	public string? Category { get; set; }
 
-	public Product(string name, decimal price)
+	public Product(string name, decimal price, string? category = null)
 	{
 		Name = name;
 		Price = price;
+		Category = category;
 	}
 
 	public override string ToString()
 	{
-		return $"Name: {Name}, price: ${Price}";
+		if (Category != null)
+			 return $"Name: {Name}, price: {Price}, category: {Category}";
+		else return $"Name: {Name}, price: {Price}";
+	}
+}
+
+public class Category
+{
+	string Name;
+	List<Product> Products;
+	
+	public Category(string name, List<Product> products)
+	{
+		Name = name; Products = products;
+	}
+	public string getCategoryName()
+	{
+		return Name;
+	}
+	public List<Product> getCategoryProduct()
+	{
+		return Products;
 	}
 }
