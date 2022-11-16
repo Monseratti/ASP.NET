@@ -1,0 +1,12 @@
+﻿@page "{id}"
+@model CW_1411_LAB3_.Pages.InfoModel
+@{
+	ViewData["Title"] = "Library: Info";
+}
+<div class="d-flex flex-column">
+	<p class="text-info">Book name: @Model.Books[0].Name</p>
+	<p>Book author: @Model.Books[0].Author</p>
+	<p>Book style: @Model.Books[0].Style</p>
+	<p>Book publisher: @Model.Books[0].Publisher</p>
+	<p>Year of publish: @Model.Books[0].Year</p>
+</div>

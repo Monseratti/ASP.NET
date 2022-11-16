@@ -1,0 +1,69 @@
+﻿@page
+@model CW_1411_LAB3_.Pages.AddBookModel
+@{
+    ViewData["Title"] = "Library: Add book";
+}
+<form class="row g-3 needs-validation" novalidate method="post">
+  <div class="col-md-4">
+    <label for="validationCustom01" class="form-label">Book name</label>
+    <input type="text" class="form-control" name="bookName" placeholder="name..." required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Author name</label>
+    <input type="text" class="form-control" name="authorName" placeholder="name..." required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Style of book</label>
+    <input type="text" class="form-control" name="bookStyle" placeholder="style..." required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+    <div class="col-md-4">
+        <label for="validationCustom02" class="form-label">Publisher</label>
+        <input type="text" class="form-control" name="publName" placeholder="publisher..." required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+  <div class="col-md-3">
+    <label for="validationCustom05" class="form-label">Year of publish</label>
+    <input type="number" max="@DateTime.Today.Year" min="1990" class="form-control" placeholder="year..." name="bookYear" required>
+    <div class="invalid-feedback">
+      Please provide a valid year.
+    </div>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-warning" type="submit">Submit</button>
+  </div>
+</form>
+
+    @section Scripts{
+<script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+</script>
+}

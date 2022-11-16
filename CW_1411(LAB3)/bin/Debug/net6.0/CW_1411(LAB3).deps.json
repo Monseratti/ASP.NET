@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "CW_1411(LAB3)/1.0.0": {
+        "runtime": {
+          "CW_1411(LAB3).dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CW_1411(LAB3)/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+@{
+	ViewData["Title"] = "Library";
+}
+
+
+<table class="table table-hover">
+
+	<th>
+	<td>Book name</td>
+	<td>Author</td>
+	<td>Style</td>
+	<td>Publisher</td>
+	<td>Year</td>
+	<td>Controls</td>
+	</th>
+
+	@foreach (Book book in Model.Books)
+	{
+		<tr >
+			<td></td>
+			<td>@book.Name</td>
+			<td>@book.Author</td>
+			<td>@book.Style</td>
+			<td>@book.Publisher</td>
+			<td>@book.Year</td>
+			<td>
+				<div class="d-flex flex-row">
+					<form method="post" asp-page-handler="Info" class="me-3">
+						<input type="hidden" value="@book.id" name="id" />
+						<button class="btn btn-success">Info</button>
+					</form>
+					<form method="post" asp-page-handler="Edit" class="me-3">
+						<input type="hidden" value="@book.id" name="id" />
+						<button class="btn btn-warning">Edit</button>
+					</form>
+					<form method="post" asp-page-handler="Delete" class="me-3">
+						<input type="hidden" value="@book.id" name="id" />
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				</div>
+			</td>
+		</tr>
+	}
+
+</table>
