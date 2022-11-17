@@ -50,8 +50,8 @@ public class Product
 
 public class Category
 {
-	string Name;
-	List<Product> Products;
+	public string Name;
+	public List<Product> Products;
 	
 	public Category(string name, List<Product> products)
 	{

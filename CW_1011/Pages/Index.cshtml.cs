@@ -81,8 +81,13 @@ namespace CW_1011.Pages
 					product.Category = Categories.Last().getCategoryName();
 				}
 
-				saveFile(Categories, "categories.json");
-				saveFile(Products, "products.json");
+                //saveFile(Categories, "categories.json");
+                string json = JsonConvert.SerializeObject(Categories);
+                using (StreamWriter writer = new StreamWriter("categories.json", false))
+                {
+                    writer.WriteLine(json);
+                }
+                saveFile(Products, "products.json");
 			}
 		}
 		public void OnPostSearchCategory()

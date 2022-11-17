@@ -71,7 +71,10 @@
 {
     foreach (Category category in Model.SearchCategories)
     {
-        <li>@category.getCategoryName()</li>
+        foreach (var item in category.getCategoryProduct())
+        {
+            <li>@item</li>
+        }
     }
 }
 
