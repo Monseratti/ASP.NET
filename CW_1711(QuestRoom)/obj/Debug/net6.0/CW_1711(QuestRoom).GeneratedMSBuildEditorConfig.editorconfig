@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Studies\ASP.NET\CW_1711(QuestRoom)
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/AddRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkUm9vbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/Admin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,6 +34,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/QRoomInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUVJvb21JbmZvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/Shared/_ValidationScriptsPartial.cshtml]

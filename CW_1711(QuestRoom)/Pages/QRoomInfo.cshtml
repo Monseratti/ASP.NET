@@ -1,0 +1,57 @@
+﻿@page "{id:int}"
+@model CW_1711_QuestRoom_.Pages.QRoomInfoModel
+@{
+	var r = Model.QRoom!;
+	var phonestr = "";
+	var emailstr = "";
+	@foreach (var phone in Model.Numbers)
+	{
+		phonestr += $"{phone.Number} ";
+	}
+	@foreach (var email in Model.Emails)
+	{
+		emailstr += $"{email.Email} ";
+	}
+}
+
+<div class="d-flex">
+	<div class="me-5">
+		<img src="@r.LogoPath" alt="nologo(@r.Name)" />
+	</div>
+	<div>
+		<h4>@r.Name</h4>
+		<div><b>Company: </b>@r.Company</div>
+		<div class="d-flex">
+			<div class="me-3"><b>Passing time: </b> @r.PassingTime minutes</div>
+			<div class="me-3"><b>Rating: </b>@r.Rating</div>
+			<div class="me-3"><b>Difficulty: </b>@r.Difficulty</div>
+			<div class="me-3"><b>Horror level: </b>@r.HorrorLevel</div>
+		</div>
+		<div><b>Players: </b> @r.MinNumOfPlayers - @r.MaxNumOfPlayers , <b>min age: </b>
+			@r.MinYearOfPlayer</div>
+		<div> <b>Contacts: </b>
+			<div class="ms-5">Address: @r.Address</div>
+			<div class="ms-5">Phones: @phonestr</div>
+			<div class="ms-5">Emails: @emailstr</div>
+		</div>
+	</div>
+</div>
+<div><b>Description: </b>@r.Description</div>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-inner">
+		@foreach (var item in Model.PicturePaths)
+		{
+			<div class="carousel-item active">
+				<img src="@item.Path" class="d-block w-100" alt="noimage(@r.Name)">
+			</div>
+		}
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
+</div>

@@ -1,10 +1,24 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+  ViewData["Title"] = "My QuestRoom";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (Model.QRooms.Count > 0)
+{
+  <div class="mycontainer container-fluid">
+    @foreach (var room in Model.QRooms)
+    {
+      <div class="card" style="width: 18rem;">
+        <img src="@room.LogoPath" class="card-img-top" alt="nologo(@room.Name)">
+        <div class="card-body">
+          <h5 class="card-title">@room.Name</h5>
+          <p class="card-text">@room.Description</p>
+          <div class="d-flex flex-row">
+            <a asp-page="QRoomInfo" asp-route-id="@room.Id" class="btn btn-info">Details</a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}

@@ -1,0 +1,65 @@
+﻿@page
+@model CW_1711_QuestRoom_.Pages.AdminModel
+@{
+}
+<a asp-page="AddRoom" class="btn btn-primary">Create room</a>
+<table class="table table-hover">
+	<thead>
+		<th>
+		<td>#</td>
+		<td>Logo</td>
+		<td>Name</td>
+		<td>Pass time</td>
+		<td>Players</td>
+		<td>Description</td>
+		<td>Parametres</td>
+		<td>Contacts</td>
+		<td>Controls</td>
+		</th>
+	</thead>
+	<tbody>
+		@if (Model.RoomList != null)
+		{
+			for (int i = 0; i < Model.RoomList.Count; i++)
+		{
+			var tmpRoom = Model.RoomList[i];
+			<tr>
+				<td></td>
+				<td>@(i+1)</td>
+				<td><img src="@tmpRoom.LogoPath" alt="noLogo(@tmpRoom.Name)"></img></td>
+				<td>@tmpRoom.Name</td>
+				<td>@tmpRoom.PassingTime</td>
+				<td>
+					<div class="d-flex flex-column">
+						<span><b>Number: </b>@tmpRoom.MinNumOfPlayers - @tmpRoom.MaxNumOfPlayers</span>
+						<span><b>Age: </b>@tmpRoom.MinYearOfPlayer </span>
+					</div>
+				</td>
+				<td class="text-wrap">@tmpRoom.Description</td>
+				<td>
+					<div class="d-flex flex-column">
+						<span><b>Rating: </b>@tmpRoom.Rating</span>
+						<span><b>Difficulty: </b>@tmpRoom.Difficulty</span>
+						<span><b>Horror level: </b>@tmpRoom.HorrorLevel</span>
+					</div>
+				</td>
+				<td>
+					<form asp-page="RoomContact" asp-route-id="@tmpRoom.Id">
+						<button class="btn btn-outline-info">Contacts</button>
+					</form>
+				</td>
+				<td>
+					<div class="d-flex flex-row">
+						<form method="post" asp-page="AddRoom" asp-page-handler="Edit" asp-route-id="@tmpRoom.Id">
+							<button class="btn btn-outline-warning">Edit</button>
+						</form>
+						<form method="post" asp-page-handler="Delete" asp-route-id="@tmpRoom.Id">
+							<button class="btn btn-outline-danger">Delete</button>
+						</form>
+					</div>
+				</td>
+			</tr>
+		}
+		}
+	</tbody>
+</table>

@@ -16,3 +16,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.mycontainer {
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    column-gap: 10px;
+    row-gap: 20px;
+}

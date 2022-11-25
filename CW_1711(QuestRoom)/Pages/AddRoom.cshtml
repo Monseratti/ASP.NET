@@ -1,0 +1,307 @@
+﻿@page "{id:int?}"
+@model CW_1711_QuestRoom_.Pages.AddRoomModel
+@{
+}
+<form class="row g-3 needs-validation" method="post" enctype="multipart/form-data" novalidate>
+    <div class="col-md-5">
+        <label for="validationCustom01" class="form-label">The company</label>
+        <input type="text" disabled asp-for="QRoom!.Id" />
+        <input type="text" asp-for="QRoom!.Company" class="form-control"  required>
+        <div class="valid-feedback">
+        Looks good!
+        </div>
+    </div>
+    <div class="col-md-5">
+        <label for="validationCustom01" class="form-label">Name of room</label>
+        <input type="text" asp-for="QRoom!.Name" class="form-control" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="col-md-2">
+        <label for="validationCustom02" class="form-label">Pass time</label>
+        <input type="number" asp-for="QRoom!.PassingTime" class="form-control" min="2" max="360" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="row">
+        <label for="validationTextarea" class="form-label">Description</label>
+        <textarea class="form-control" asp-for=QRoom!.Description id="validationTextarea" placeholder="Description..." required></textarea>
+        <div class="invalid-feedback">
+            Please enter a description for the room.
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom01" class="form-label">Address</label>
+        <input type="text" asp-for="QRoom!.Address" class="form-control" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+
+    @*#Phone/emails*@
+    <div class="accordion col-md-6">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen" aria-expanded="true" aria-controls="panelsStayOpen">
+                    Phone numbers
+                </button>
+            </h2>
+            <div id="panelsStayOpen" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body" id="phoneBody">
+                    <button class="btn btn-info" type="button" id="addPhone">Add another phone...</button>
+                    <div class="row">
+                        <label for="validationCustom01" class="form-label">Phone:
+                            <input type="text" asp-for="Number!.Number" class="form-control" required>
+                        </label>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    Emails
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                    <div class="accordion-body" id="emailBody">
+                        <button class="btn btn-info" id="addEmail">Add another email...</button>
+                        <div class="row">
+                            <label for="validationCustom01" class="form-label">Email: </label>
+                            <input type="text" asp-for="RoomEmail!.Email" class="form-control" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    @*#end Phone/emails*@
+    
+    <div class="col-md-6">
+        <label for="validationCustomUsername" class="form-label">Player`s quantity</label>
+        <div class="input-group has-validation d-flex flex-row">
+            <input type="number" asp-for="QRoom!.MinNumOfPlayers" class="form-control me-3" aria-describedby="inputGroupPrepend" id="minPeople" min="1" placeholder="min..." required>
+            <input type="number" asp-for="QRoom!.MaxNumOfPlayers" class="form-control" aria-describedby="inputGroupPrepend" id="maxPeople" min="1" placeholder="max..." required>
+            <div class="invalid-feedback">
+                Please set player's quantity.
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Minimum player`s age</label>
+        <input type="number" asp-for="QRoom!.MinYearOfPlayer" class="form-control" min="6" max="80" required>
+        <div class="invalid-feedback">
+            Please set minimum player`s age.
+        </div>
+  </div>
+    <div class="col-md-4">
+        <label for="validationCustom04"  class="form-label">Rating</label>
+        <select class="form-select" asp-for="QRoom!.Rating" required>
+            @for (int i = 0; i < 5; i++)
+            {
+                <option value="@(i+1)">@(i + 1)</option>
+            }
+        </select>
+        <div class="invalid-feedback">
+            Please select a rating.
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label for="validationCustom04" class="form-label">Difficulty</label>
+        <select class="form-select" asp-for="QRoom!.Difficulty" required>
+            @for (int i = 0; i < 5; i++)
+                {
+                    <option value="@(i+1)">@(i + 1)</option>
+                }
+        </select>
+        <div class="invalid-feedback">
+            Please select a difficulty.
+        </div>
+  </div>
+    <div class="col-md-4">
+        <label for="validationCustom04" class="form-label">Horror level</label>
+        <select class="form-select" asp-for="QRoom!.HorrorLevel" required>
+            @for (int i = 0; i < 5; i++)
+                {
+                    <option value="@(i+1)">@(i + 1)</option>
+                }
+        </select>
+        <div class="invalid-feedback">
+          Please select a horror level.
+        </div>
+  </div>
+    <div class="col-md-6">
+        <label for="validationCustom04" class="form-label">Label photo</label>
+        <input type="file" asp-for="QRoom!.LogoPath" class="form-control" aria-label="file example" required>
+        <div class="invalid-feedback">Load the label of the room</div>
+    </div>
+    @*Gallery*@
+    <div class="accordion col-md-6">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    Gallery
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body" id="galleryBody">
+                    <button class="btn btn-info" type="button" id="addImage">Add another image...</button>
+                    <div class="row">
+                        <label class="form-label">
+                            Picture:
+                            <input type="file" name="picture0" class="form-control">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*end Gallery*@
+    <div class="row mt-5">
+        <button class="btn btn-outline-success" type="submit">Add room</button>
+    </div>
+</form>
+
+
+@section Scripts{
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+
+        let maxP = document.querySelector("#maxPeople");
+        let minP = document.querySelector("#minPeople");
+
+        maxP.addEventListener("change",()=>{
+            maxP.min=minP.value;
+        })
+        minP.addEventListener("change", () => {
+            maxP.min = minP.value;
+            if(maxP.value<maxP.min)
+                maxP.value = maxP.min;
+        })
+        var phoneID = 0;
+        document.getElementById("addPhone").addEventListener("click", ()=>{
+            let phoneContainer = document.getElementById("phoneBody");
+            let mainDiv = document.createElement("div");
+            mainDiv.classList.add("row");
+            mainDiv.id = `phoneID${phoneID}`;
+            let label = document.createElement("label");
+            label.classList.add("form-label");
+            label.classList.add("d-flex");
+            label.classList.add("flex-row");
+            label.innerText = "Phone:";
+            let inp = document.createElement("input");
+            inp.type = "text";
+            inp.classList.add("form-control");
+            inp.name = `phoneNumber${phoneID}`;
+            let btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-close");
+            btn.addEventListener("click",()=>{
+                phoneContainer.removeChild(document.getElementById(mainDiv.id));
+                phoneID--;
+            })
+            phoneID = phoneID+1;
+            label.appendChild(inp);
+            label.appendChild(btn);
+            let feedb = document.createElement("div");
+            feedb.classList.add("valid-feedback");
+            feedb.innerText = "Looks good";
+            mainDiv.appendChild(label);
+            mainDiv.appendChild(feedb);
+            phoneContainer.appendChild(mainDiv);
+        })
+
+        var emailID = 0;
+        document.getElementById("addEmail").addEventListener("click", () => {
+            let emailContainer = document.getElementById("emailBody");
+            let mainDiv = document.createElement("div");
+            mainDiv.classList.add("row");
+            mainDiv.id = `emailID${emailID}`;
+            let label = document.createElement("label");
+            label.classList.add("form-label");
+            label.classList.add("d-flex");
+            label.classList.add("flex-row");
+            label.innerText = "Email:";
+            let inp = document.createElement("input");
+            inp.type = "text";
+            inp.classList.add("form-control");
+            inp.name = `email${emailID}`;
+            let btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-close");
+            btn.addEventListener("click", () => {
+                emailContainer.removeChild(document.getElementById(mainDiv.id));
+                emailID--;
+            })
+            emailID = emailID + 1;
+            label.appendChild(inp);
+            label.appendChild(btn);
+            let feedb = document.createElement("div");
+            feedb.classList.add("valid-feedback");
+            feedb.innerText = "Looks good";
+            mainDiv.appendChild(label);
+            mainDiv.appendChild(feedb);
+            emailContainer.appendChild(mainDiv);
+        })
+
+        var pictureID = 1;
+        document.getElementById("addImage").addEventListener("click", ()=>{
+            let galleryContainer = document.getElementById("galleryBody");
+            let mainDiv = document.createElement("div");
+            mainDiv.classList.add("row");
+            mainDiv.id = `pictureID${pictureID}`;
+            let label = document.createElement("label");
+            label.classList.add("form-label");
+            label.classList.add("d-flex");
+            label.classList.add("flex-row");
+            label.innerText = "Picture: ";
+            let inp = document.createElement("input");
+            inp.type = "file";
+            inp.classList.add("form-control");
+            inp.name = `picture${pictureID}`;
+            let btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-close");
+            btn.addEventListener("click", () => {
+                galleryContainer.removeChild(document.getElementById(mainDiv.id));
+                pictureID--;
+            })
+            pictureID = pictureID + 1;
+            label.appendChild(inp);
+            label.appendChild(btn);
+            let feedb = document.createElement("div");
+            feedb.classList.add("valid-feedback");
+            feedb.innerText = "Looks good";
+            mainDiv.appendChild(label);
+            mainDiv.appendChild(feedb);
+            galleryContainer.appendChild(mainDiv);
+        })
+
+</script>
+}

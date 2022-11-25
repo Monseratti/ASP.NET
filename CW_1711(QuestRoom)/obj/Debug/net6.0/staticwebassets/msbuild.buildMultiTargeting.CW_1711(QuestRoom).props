@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\CW_1711(QuestRoom).props" />
+</Project>
