@@ -1,0 +1,125 @@
+﻿@page "{id:int}"
+@model CW_1711_QuestRoom_.Pages.RoomContactModel
+@{
+}
+
+<form method="post" class="row">
+    <input name="id" hidden value="@Model.PhoneNumbers[0].QRoomId" />
+    <div class="col-md-6">
+        <button class="btn btn-info" type="button" id="addPhone">Add another phone...</button>
+    <div class="row" id="phoneContainer">
+@for(int i=0; i<Model.PhoneNumbers.Count; i++){
+                <label for="validationCustom01" id="number_@i" class="form-label d-flex">
+            Phone:
+            <input type="tel" name="number_@i"  class="form-control" value="@Model.PhoneNumbers[i].Number">
+                    @if (i != 0)
+                    {
+                        <button class="btn btn-close" type="button" onclick="removePhoneChild('number_@i')"></button>
+                    }
+                </label>
+}
+    </div>
+    </div>
+    
+    <div class="col-md-5">
+        <button class="btn btn-info" type="button" id="addEmail">Add another email...</button>
+    <div class="row" id="emailContainer">
+@for(int i=0; i<Model.Emails.Count; i++){
+        <label for="validationCustom01" class="form-label">
+            Email:
+            <input type="email" name="email_@i" class="form-control" value="@Model.Emails[i].Email">
+             @if (i != 0)
+                    {
+                        <button class="btn btn-close" type="button" onclick="removeEmailChild('email_@i')"></button>
+                    }
+        </label>
+}
+    </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-outline-info"> Save changes</button>
+    </div>
+</form>
+
+@section Scripts{
+<script>
+        var phoneID = @Model.PhoneNumbers.Count;
+        var emailID = @Model.Emails.Count;
+
+        function removePhoneChild(childID) {
+            document.getElementById("phoneContainer").removeChild(document.getElementById(childID));
+            phoneID--;
+        }
+        function removePhoneChild(childID) {
+            document.getElementById("emailContainer").removeChild(document.getElementById(childID));
+            phoneID--;
+        }
+
+        document.getElementById("addPhone").addEventListener("click", () => {
+            let phoneContainer = document.getElementById("phoneContainer");
+            let mainDiv = document.createElement("div");
+            mainDiv.classList.add("row");
+            mainDiv.id = `number_${phoneID}`;
+            let label = document.createElement("label");
+            label.classList.add("form-label");
+            label.classList.add("d-flex");
+            label.classList.add("flex-row");
+            label.innerText = "Phone:";
+            let inp = document.createElement("input");
+            inp.type = "text";
+            inp.classList.add("form-control");
+            inp.name = `number_${phoneID}`;
+            let btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-close");
+            btn.type="button";
+            btn.addEventListener("click", () => {
+                phoneContainer.removeChild(document.getElementById(mainDiv.id));
+                phoneID--;
+            })
+            phoneID++;
+            label.appendChild(inp);
+            label.appendChild(btn);
+            let feedb = document.createElement("div");
+            feedb.classList.add("valid-feedback");
+            feedb.innerText = "Looks good";
+            mainDiv.appendChild(label);
+            mainDiv.appendChild(feedb);
+            phoneContainer.appendChild(mainDiv);
+        })
+
+        document.getElementById("addEmail").addEventListener("click", () => {
+            let emailContainer = document.getElementById("emailContainer");
+            let mainDiv = document.createElement("div");
+            mainDiv.classList.add("row");
+            mainDiv.id = `email_${emailID}`;
+            let label = document.createElement("label");
+            label.classList.add("form-label");
+            label.classList.add("d-flex");
+            label.classList.add("flex-row");
+            label.innerText = "Email:";
+            let inp = document.createElement("input");
+            inp.type = "text";
+            inp.classList.add("form-control");
+            inp.name = `email_${emailID}`;
+            let btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-close");
+            btn.type = "button";
+            btn.addEventListener("click", () => {
+                emailContainer.removeChild(document.getElementById(mainDiv.id));
+                emailID--;
+            })
+            emailID++;
+            label.appendChild(inp);
+            label.appendChild(btn);
+            let feedb = document.createElement("div");
+            feedb.classList.add("valid-feedback");
+            feedb.innerText = "Looks good";
+            mainDiv.appendChild(label);
+            mainDiv.appendChild(feedb);
+            emailContainer.appendChild(mainDiv);
+        })
+
+</script>
+}

@@ -37,19 +37,10 @@ namespace CW_1711_QuestRoom_.Pages
         {
         }
 
-        public async Task OnPostEditAsync (int id)
-        {
-            QRoom = await db.Rooms.FindAsync(id);
-            PhoneNumbers = await db.PhoneNumber.Where(o => o.QRoomId.Equals(id)).OrderBy(o=>o.Id).ToListAsync();
-            RoomEmails = await db.RoomEmail.Where(o => o.QRoomId.Equals(id)).OrderBy(o => o.Id).ToListAsync();
-            Number = PhoneNumbers[0];
-            RoomEmail= RoomEmails[0];
-        }
-
         public async Task<IActionResult> OnPost()
         {
             var files = Request.Form.Files;
-            var directory = $@"{Directory.GetCurrentDirectory()}\wwwroot\Files\{QRoom!.Name}";
+            var directory = $@"{Directory.GetCurrentDirectory()}\wwwroot\Files\{QRoom!.Name.Replace(" ","_")}";
             Directory.CreateDirectory(directory);
             if (files.Count != 0)
             {
@@ -58,6 +49,7 @@ namespace CW_1711_QuestRoom_.Pages
                 {
                     await files[0].CopyToAsync(fs);
                 }
+                QRoom.LogoPath = $@"{directory}\{files[0].FileName}".Split("wwwroot")[1];
             }
             await db.Rooms.AddAsync(QRoom!);
             await db.SaveChangesAsync();
@@ -104,13 +96,14 @@ namespace CW_1711_QuestRoom_.Pages
                     {
                         Picture = new PicturePath();
                         Picture.QRoomId = QRoom.Id;
-                        var galleryDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\Files\{QRoom!.Name}\Gallery";
+                        var galleryDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\Files\{QRoom!.Name.Replace(" ","_")}\Gallery";
                         Directory.CreateDirectory(galleryDir);
                         Picture.Path = $@"{galleryDir}\{files[i].FileName}";
                         using (FileStream fs = new FileStream(Picture.Path, FileMode.Create))
                         {
                             await files[i].CopyToAsync(fs);
                         }
+                        Picture.Path = $@"{galleryDir}\{files[i].FileName}".Split("wwwroot")[1];
                         PicturePaths!.Add(Picture);
                     }
                     catch (Exception)

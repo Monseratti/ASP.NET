@@ -26,7 +26,7 @@ namespace CW_1711_QuestRoom_.Pages
             db.PhoneNumber.RemoveRange(await db.PhoneNumber.Where(o=>o.QRoomId.Equals(id)).ToListAsync());
             db.PicturePath.RemoveRange(await db.PicturePath.Where(o=>o.QRoomId.Equals(id)).ToListAsync());
             await db.SaveChangesAsync();
-            return Page();
+            return RedirectToPage();
         }
     }
 }

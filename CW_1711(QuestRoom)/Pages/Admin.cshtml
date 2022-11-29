@@ -44,13 +44,13 @@
 					</div>
 				</td>
 				<td>
-					<form asp-page="RoomContact" asp-route-id="@tmpRoom.Id">
+					<form method="get" asp-page="RoomContact" asp-route-id="@tmpRoom.Id">
 						<button class="btn btn-outline-info">Contacts</button>
 					</form>
 				</td>
 				<td>
 					<div class="d-flex flex-row">
-						<form method="post" asp-page="AddRoom" asp-page-handler="Edit" asp-route-id="@tmpRoom.Id">
+						<form method="get" asp-page="EditRoom" asp-route-id="@tmpRoom.Id">
 							<button class="btn btn-outline-warning">Edit</button>
 						</form>
 						<form method="post" asp-page-handler="Delete" asp-route-id="@tmpRoom.Id">

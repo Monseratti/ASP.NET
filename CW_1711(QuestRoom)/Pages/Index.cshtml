@@ -6,7 +6,48 @@
 
 @if (Model.QRooms.Count > 0)
 {
-  <div class="mycontainer container-fluid">
+  <form class="col-md-3">
+        <input 
+           id="t1"
+           name="minMaxPlayer"
+           data-role="doubleslider"
+           data-show-min-max="true"
+           data-hint-mask-min="Min player: $1"
+           data-hint-mask-max="Max player: $1"
+           data-hint-always="true"
+           data-value-min="0"
+           data-value-max="100"
+           step="1"
+           data-cls-hint="bg-cyan fg-white">
+        <input 
+           id="t2"
+           name="fearRate"
+           data-role="doubleslider"
+           data-show-min-max="true"
+           data-hint-mask-min="Min fear: $1"
+           data-hint-mask-max="Max fear: $1"
+           data-hint-always="true"
+           data-value-min="1"
+           data-value-max="5"
+           step="1"
+           data-cls-hint="bg-cyan fg-white">
+        <input 
+           id="t3"
+           name="diff"
+           data-role="doubleslider"
+           data-show-min-max="true"
+           data-hint-mask-min="Min diff: $1"
+           data-hint-mask-max="Max diff: $1"
+           data-hint-always="true"
+           data-value-min="1"
+           data-value-max="5"
+           step="1"
+           data-cls-hint="bg-cyan fg-white">
+  
+  <button class="btn btn-outline-success">filter</button>
+  </form>
+
+  <div class="mycontainer col-md-9">
     @foreach (var room in Model.QRooms)
     {
       <div class="card" style="width: 18rem;">

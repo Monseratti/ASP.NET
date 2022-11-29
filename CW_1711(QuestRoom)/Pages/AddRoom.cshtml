@@ -1,11 +1,10 @@
-﻿@page "{id:int?}"
+﻿@page 
 @model CW_1711_QuestRoom_.Pages.AddRoomModel
 @{
 }
 <form class="row g-3 needs-validation" method="post" enctype="multipart/form-data" novalidate>
     <div class="col-md-5">
         <label for="validationCustom01" class="form-label">The company</label>
-        <input type="text" disabled asp-for="QRoom!.Id" />
         <input type="text" asp-for="QRoom!.Company" class="form-control"  required>
         <div class="valid-feedback">
         Looks good!
@@ -70,7 +69,7 @@
             </h2>
             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body" id="emailBody">
-                        <button class="btn btn-info" id="addEmail">Add another email...</button>
+                        <button class="btn btn-info" type="button" id="addEmail">Add another email...</button>
                         <div class="row">
                             <label for="validationCustom01" class="form-label">Email: </label>
                             <input type="text" asp-for="RoomEmail!.Email" class="form-control" required>
@@ -88,8 +87,8 @@
     <div class="col-md-6">
         <label for="validationCustomUsername" class="form-label">Player`s quantity</label>
         <div class="input-group has-validation d-flex flex-row">
-            <input type="number" asp-for="QRoom!.MinNumOfPlayers" class="form-control me-3" aria-describedby="inputGroupPrepend" id="minPeople" min="1" placeholder="min..." required>
-            <input type="number" asp-for="QRoom!.MaxNumOfPlayers" class="form-control" aria-describedby="inputGroupPrepend" id="maxPeople" min="1" placeholder="max..." required>
+            <input type="number" asp-for="QRoom!.MinNumOfPlayers" class="form-control me-3" aria-describedby="inputGroupPrepend" id="minPeople" min="1" max="100" placeholder="min..." required>
+            <input type="number" asp-for="QRoom!.MaxNumOfPlayers" class="form-control" aria-describedby="inputGroupPrepend" id="maxPeople" min="1" max="100" placeholder="max..." required>
             <div class="invalid-feedback">
                 Please set player's quantity.
             </div>
@@ -143,6 +142,7 @@
         <input type="file" asp-for="QRoom!.LogoPath" class="form-control" aria-label="file example" required>
         <div class="invalid-feedback">Load the label of the room</div>
     </div>
+   
     @*Gallery*@
     <div class="accordion col-md-6">
         <div class="accordion-item">
@@ -165,6 +165,7 @@
         </div>
     </div>
     @*end Gallery*@
+    
     <div class="row mt-5">
         <button class="btn btn-outline-success" type="submit">Add room</button>
     </div>
@@ -226,7 +227,7 @@
                 phoneContainer.removeChild(document.getElementById(mainDiv.id));
                 phoneID--;
             })
-            phoneID = phoneID+1;
+            phoneID++;
             label.appendChild(inp);
             label.appendChild(btn);
             let feedb = document.createElement("div");
@@ -259,7 +260,7 @@
                 emailContainer.removeChild(document.getElementById(mainDiv.id));
                 emailID--;
             })
-            emailID = emailID + 1;
+            emailID++;
             label.appendChild(inp);
             label.appendChild(btn);
             let feedb = document.createElement("div");
@@ -292,7 +293,7 @@
                 galleryContainer.removeChild(document.getElementById(mainDiv.id));
                 pictureID--;
             })
-            pictureID = pictureID + 1;
+            pictureID++;
             label.appendChild(inp);
             label.appendChild(btn);
             let feedb = document.createElement("div");

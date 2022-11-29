@@ -24,6 +24,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/EditRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFJvb20uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,6 +42,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/QRoomInfo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUVJvb21JbmZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/RoomContact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbUNvbnRhY3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Studies/ASP.NET/CW_1711(QuestRoom)/Pages/Shared/_ValidationScriptsPartial.cshtml]

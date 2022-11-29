@@ -5,20 +5,28 @@
       "PackagePath": "staticwebassets\\CW_1711(QuestRoom).bundle.scp.css"
     },
     {
-      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test 1\\Gallery\\Scrabble.jpg",
-      "PackagePath": "staticwebassets\\Files\\Test 1\\Gallery\\Scrabble.jpg"
+      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_1\\Gallery\\Scrabble.jpg",
+      "PackagePath": "staticwebassets\\Files\\Test_1\\Gallery\\Scrabble.jpg"
     },
     {
-      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test 1\\Horrable.jpg",
-      "PackagePath": "staticwebassets\\Files\\Test 1\\Horrable.jpg"
+      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_1\\Gallery\\SomePicture.jpg",
+      "PackagePath": "staticwebassets\\Files\\Test_1\\Gallery\\SomePicture.jpg"
     },
     {
-      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test 2\\Gallery\\Horrable.jpg",
-      "PackagePath": "staticwebassets\\Files\\Test 2\\Gallery\\Horrable.jpg"
+      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_1\\Horrable.jpg",
+      "PackagePath": "staticwebassets\\Files\\Test_1\\Horrable.jpg"
     },
     {
-      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test 2\\SomePicture.jpg",
-      "PackagePath": "staticwebassets\\Files\\Test 2\\SomePicture.jpg"
+      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_1\\Scrabble.jpg",
+      "PackagePath": "staticwebassets\\Files\\Test_1\\Scrabble.jpg"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_2\\Scrabble.jpg",
+      "PackagePath": "staticwebassets\\Files\\Test_2\\Scrabble.jpg"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_3\\Horrable.jpg",
+      "PackagePath": "staticwebassets\\Files\\Test_3\\Horrable.jpg"
     },
     {
       "Id": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\css\\site.css",

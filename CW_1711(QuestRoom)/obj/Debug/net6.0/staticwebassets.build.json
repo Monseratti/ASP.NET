@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+1EEC6YwSELOTYY+hv2bMBb2IZ1AzxTc6+sOOIxOCls=",
+  "Hash": "YOJkw6cURhiRJjrRyl0Qq/NOuyQPPhWrGFtPaDOHJO0=",
   "Source": "CW_1711(QuestRoom)",
   "BasePath": "_content/CW_1711(QuestRoom)",
   "Mode": "Default",
@@ -85,12 +85,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test 1\\Gallery\\Scrabble.jpg",
+      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_1\\Gallery\\Scrabble.jpg",
       "SourceId": "CW_1711(QuestRoom)",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\",
       "BasePath": "_content/CW_1711(QuestRoom)",
-      "RelativePath": "Files/Test 1/Gallery/Scrabble.jpg",
+      "RelativePath": "Files/Test_1/Gallery/Scrabble.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,15 +99,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Files\\Test 1\\Gallery\\Scrabble.jpg"
+      "OriginalItemSpec": "wwwroot\\Files\\Test_1\\Gallery\\Scrabble.jpg"
     },
     {
-      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test 1\\Horrable.jpg",
+      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_1\\Gallery\\SomePicture.jpg",
       "SourceId": "CW_1711(QuestRoom)",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\",
       "BasePath": "_content/CW_1711(QuestRoom)",
-      "RelativePath": "Files/Test 1/Horrable.jpg",
+      "RelativePath": "Files/Test_1/Gallery/SomePicture.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -116,15 +116,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Files\\Test 1\\Horrable.jpg"
+      "OriginalItemSpec": "wwwroot\\Files\\Test_1\\Gallery\\SomePicture.jpg"
     },
     {
-      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test 2\\Gallery\\Horrable.jpg",
+      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_1\\Horrable.jpg",
       "SourceId": "CW_1711(QuestRoom)",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\",
       "BasePath": "_content/CW_1711(QuestRoom)",
-      "RelativePath": "Files/Test 2/Gallery/Horrable.jpg",
+      "RelativePath": "Files/Test_1/Horrable.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -133,15 +133,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Files\\Test 2\\Gallery\\Horrable.jpg"
+      "OriginalItemSpec": "wwwroot\\Files\\Test_1\\Horrable.jpg"
     },
     {
-      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test 2\\SomePicture.jpg",
+      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_1\\Scrabble.jpg",
       "SourceId": "CW_1711(QuestRoom)",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\",
       "BasePath": "_content/CW_1711(QuestRoom)",
-      "RelativePath": "Files/Test 2/SomePicture.jpg",
+      "RelativePath": "Files/Test_1/Scrabble.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -150,7 +150,41 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Files\\Test 2\\SomePicture.jpg"
+      "OriginalItemSpec": "wwwroot\\Files\\Test_1\\Scrabble.jpg"
+    },
+    {
+      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_2\\Scrabble.jpg",
+      "SourceId": "CW_1711(QuestRoom)",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\",
+      "BasePath": "_content/CW_1711(QuestRoom)",
+      "RelativePath": "Files/Test_2/Scrabble.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Files\\Test_2\\Scrabble.jpg"
+    },
+    {
+      "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\Files\\Test_3\\Horrable.jpg",
+      "SourceId": "CW_1711(QuestRoom)",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\",
+      "BasePath": "_content/CW_1711(QuestRoom)",
+      "RelativePath": "Files/Test_3/Horrable.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Files\\Test_3\\Horrable.jpg"
     },
     {
       "Identity": "D:\\Studies\\ASP.NET\\CW_1711(QuestRoom)\\wwwroot\\js\\site.js",
