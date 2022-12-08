@@ -6,49 +6,37 @@
 
 @if (Model.QRooms.Count > 0)
 {
-  <form class="col-md-3">
-        <input 
-           id="t1"
-           name="minMaxPlayer"
-           data-role="doubleslider"
-           data-show-min-max="true"
-           data-hint-mask-min="Min player: $1"
-           data-hint-mask-max="Max player: $1"
-           data-hint-always="true"
-           data-value-min="0"
-           data-value-max="100"
-           step="1"
-           data-cls-hint="bg-cyan fg-white">
-        <input 
-           id="t2"
-           name="fearRate"
-           data-role="doubleslider"
-           data-show-min-max="true"
-           data-hint-mask-min="Min fear: $1"
-           data-hint-mask-max="Max fear: $1"
-           data-hint-always="true"
-           data-value-min="1"
-           data-value-max="5"
-           step="1"
-           data-cls-hint="bg-cyan fg-white">
-        <input 
-           id="t3"
-           name="diff"
-           data-role="doubleslider"
-           data-show-min-max="true"
-           data-hint-mask-min="Min diff: $1"
-           data-hint-mask-max="Max diff: $1"
-           data-hint-always="true"
-           data-value-min="1"
-           data-value-max="5"
-           step="1"
-           data-cls-hint="bg-cyan fg-white">
-  
-  <button class="btn btn-outline-success">filter</button>
+  <form method="post" asp-page-handler="Filter" class="mb-5">
+      <div class="d-flex mb-1">
+        <label>
+            Rating from
+        <input class="ms-2 me-2" style="width:100px" type="number" min="1" max="5" plaseholder="Min rating..." name="minRating"/>
+            to
+        <input class="ms-2 me-2" style="width:100px" type="number" min="1" max="5" plaseholder="Max rating..." name="maxRating" />
+        </label>
+      </div>
+        <div class="d-flex mb-1">
+        <label>
+            Fear from
+        <input class="ms-4 me-2" style="width:100px" type="number" min="1" max="5" plaseholder="Min fear..." name="minFear"/>
+            to
+        <input class="ms-2 me-2" style="width:100px" type="number" min="1" max="5" plaseholder="Max fear..." name="maxFear" />
+        </label>
+      </div>
+       <div class="d-flex mb-1">
+        <label>
+            People from
+        <input class="ms-2 me-2" style="width:100px" type="number" min="1" max="100" plaseholder="Min people..." name="minPeople"/>
+            to
+        <input class="ms-2 me-2" style="width:100px" type="number" min="1" max="100" plaseholder="Max peolpe..." name="maxPeople" />
+        </label>
+      </div>
+  <button class="btn btn-outline-success">Filter</button>
+  <button class="btn btn-outline-danger" asp-page-handler="ClearFilter">Clear</button>
   </form>
 
   <div class="mycontainer col-md-9">
-    @foreach (var room in Model.QRooms)
+    @foreach (var room in Model.FilteredQrooms)
     {
       <div class="card" style="width: 18rem;">
         <img src="@room.LogoPath" class="card-img-top" alt="nologo(@room.Name)">
@@ -63,3 +51,38 @@
     }
   </div>
 }
+
+    @section Scripts{
+        <script>
+        document.getElementsByName("minRating")[0].addEventListener("change",(e)=>{
+            if(document.getElementsByName("maxRating")[0].value<e.target.value)
+            document.getElementsByName("maxRating")[0].value = e.target.value;
+        })
+
+        document.getElementsByName("minFear")[0].addEventListener("change", (e) => {
+            if (document.getElementsByName("maxFear")[0].value < e.target.value)
+            document.getElementsByName("maxFear")[0].value = e.target.value;
+        })
+
+        document.getElementsByName("minPeople")[0].addEventListener("change", (e) => {
+            if (document.getElementsByName("maxPeople")[0].value < e.target.value)
+            document.getElementsByName("maxPeople")[0].value = e.target.value;
+        })
+
+        document.getElementsByName("maxRating")[0].addEventListener("change", (e) => {
+            if(document.getElementsByName("minRating")[0].value == 0)
+            document.getElementsByName("minRating")[0].value = 1;
+        })
+        document.getElementsByName("maxFear")[0].addEventListener("change", (e) => {
+            if(document.getElementsByName("minFear")[0].value == 0)
+            document.getElementsByName("minFear")[0].value = 1;
+        })
+        document.getElementsByName("maxPeople")[0].addEventListener("change", (e) => {
+            if(document.getElementsByName("minPeople")[0].value == 0)
+            document.getElementsByName("minPeople")[0].value = 1;
+        })
+
+
+        </script>
+}
+   

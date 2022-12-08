@@ -1,0 +1,34 @@
+﻿@using CW_0112.Controllers;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<form method="post">
+    <div class="d-flex" id="decimalInp">
+        <input name="number" type="text" placeholder="decimal fraction..." />
+    </div>
+    <select name="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <div class="d-flex" id="simpleInp">
+        <input name="whole" type="number" placeholder="whole..."/>
+        <input name="numer" type="number" placeholder="numerator..." />
+        <input name="denum" type="number" placeholder="denumerator..." />
+    </div>
+    <button class="btn btn-outline-warning">Send</button>
+</form>
+
+
+
+@model IEnumerable<Result>
+@if (Model!= null)
+{
+    foreach (var res in Model)
+    {
+        <p>@res.ToString()</p>
+    }
+}
