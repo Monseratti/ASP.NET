@@ -30,3 +30,4 @@ D:\Studies\ASP.NET\CW_0112\obj\Debug\net6.0\CW_0112.pdb
 D:\Studies\ASP.NET\CW_0112\obj\Debug\net6.0\CW_0112.genruntimeconfig.cache
 D:\Studies\ASP.NET\CW_0112\obj\Debug\net6.0\ref\CW_0112.dll
 D:\Studies\ASP.NET\CW_0112\bin\Debug\net6.0\Result.json
+D:\Studies\ASP.NET\CW_0112\bin\Debug\net6.0\cars.json

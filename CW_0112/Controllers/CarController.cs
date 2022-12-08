@@ -1,6 +1,7 @@
 ﻿using CW_0112.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace CW_0112.Controllers
 {
@@ -8,14 +9,26 @@ namespace CW_0112.Controllers
     {
         List<Car> Cars { get; set; }
         
-        
-        
+        public CarController()
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader("cars.json"))
+                {
+                    Cars = JsonSerializer.Deserialize<List<Car>>(sr.ReadToEnd())!;
+                }
+            }
+            catch (Exception)
+            {
+                Cars = new List<Car>();
+            }
+        }        
         
         
         // GET: CarController
         public ActionResult Index()
         {
-            return View();
+            return View(Cars);
         }
 
         // GET: CarController/Details/5
@@ -27,7 +40,7 @@ namespace CW_0112.Controllers
         // GET: CarController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Car());
         }
 
         // POST: CarController/Create
@@ -37,6 +50,11 @@ namespace CW_0112.Controllers
         {
             try
             {
+                Cars.Add(new Car(int.Parse(collection["Id"]),collection["Name"], collection["Color"], collection["Manufacturer"], int.Parse(collection["Year"]), int.Parse(collection["EngineV"])));
+                using (StreamWriter sw = new StreamWriter("cars.json",false))
+                {
+                    sw.WriteLine(JsonSerializer.Serialize(Cars));
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -48,7 +66,7 @@ namespace CW_0112.Controllers
         // GET: CarController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(Cars.Where(o=>o.Id.Equals(id)).First());
         }
 
         // POST: CarController/Edit/5
@@ -58,6 +76,15 @@ namespace CW_0112.Controllers
         {
             try
             {
+                Cars.Where(o => o.Id.Equals(id)).First().Name = collection["Name"];
+                Cars.Where(o => o.Id.Equals(id)).First().Color = collection["Color"];
+                Cars.Where(o => o.Id.Equals(id)).First().Manufacturer = collection["Manufacturer"];
+                Cars.Where(o => o.Id.Equals(id)).First().Year = int.Parse(collection["Year"]);
+                Cars.Where(o => o.Id.Equals(id)).First().EngineV = int.Parse(collection["EngineV"]);
+                using (StreamWriter sw = new StreamWriter("cars.json", false))
+                {
+                    sw.WriteLine(JsonSerializer.Serialize(Cars));
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -79,6 +106,11 @@ namespace CW_0112.Controllers
         {
             try
             {
+                Cars.Remove(Cars.Where(o => o.Id.Equals(id)).First());
+                using (StreamWriter sw = new StreamWriter("cars.json", false))
+                {
+                    sw.WriteLine(JsonSerializer.Serialize(Cars));
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
