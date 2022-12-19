@@ -1,4 +1,5 @@
-﻿using System.Data.SqlTypes;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.Data.SqlTypes;
 
 namespace MyMarketplase.Models
 {
@@ -10,7 +11,9 @@ namespace MyMarketplase.Models
         public decimal SellAmount { get; set; }
         public decimal SellingPrice { get; set; }
 
+        [ValidateNever]
         public virtual Order Order { get; set; }
+        [ValidateNever]
         public virtual Nomenclature Nomenclature { get; set; }
     }
 }

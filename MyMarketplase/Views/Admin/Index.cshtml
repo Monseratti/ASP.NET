@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Welcome, <b>@User.Identity.Name</b></h1>
+<ul>
+    <li>
+        <a asp-action="Index" asp-controller="Users">Go to user panel</a>
+    </li>
+    <li>
+        <a asp-action="Index" asp-controller="Nomenclatures">Go to nomenclature panel</a>
+    </li>
+    <li>
+        <a asp-action="Index" asp-controller="Categories">Go to category panel</a>
+    </li>
+</ul>

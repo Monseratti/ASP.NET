@@ -11,6 +11,7 @@ namespace MyMarketplase.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<FilesPath> FilesPaths { get; set; }
         public DbSet<Warehouse> Warehouse { get; set; }
+        public DbSet<WarehouseNomenclature> WarehouseNoms { get; set; }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderState> OrderStates { get; set; }
