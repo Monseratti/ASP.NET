@@ -9,8 +9,8 @@
 <h4>Nomenclature</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div>
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -24,10 +24,35 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CategoryID" class="control-label"></label>
+                <label class="control-label">Category</label>
                 <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID"></select>
                 <span asp-validation-for="CategoryID" class="text-danger"></span>
             </div>
+            @*Gallery*@
+            <div class="accordion col-md-12">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            Gallery
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                        @foreach(var image in ViewBag.Images)
+                        {
+                            <div class="d-flex" id="@image.Id">
+                                <img src="@image.Path" class="w-25 h-25" alt="none">
+                                <input type="text" value="@image.Path" name="@image.Id" hidden >
+                                <button type="button" class="btn btn-close" id="btn_remove" onclick="toggleClassOpacity(event)" name="@image.Id"></button>
+                            </div>
+                        }
+                        <div class="accordion-body" id="galleryBody">
+                            <button class="btn btn-info" type="button" id="addImage">Add another image...</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            @*end Gallery*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -41,4 +66,122 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        var pictureID = 0;
+
+        //<div class="drop-zone" >
+        //    <span class="drop-zone__prompt" > Drop file here or click to upload < /span>
+        //        < input type = "file" name = "myFile" class="drop-zone__input" >
+        //            </div>
+
+        document.getElementById("addImage").addEventListener("click", () => {
+            let galleryContainer = document.getElementById("galleryBody");
+
+            let contDiv = document.createElement("div");
+            contDiv.classList.add("row");
+            contDiv.id = `pictureID${pictureID}`
+            let mainDiv = document.createElement("div");
+            mainDiv.classList.add("drop-zone");
+            let span = document.createElement("span");
+            span.classList.add("drop-zone__prompt");
+            span.innerText = "Drop file here or click to upload";
+            let inp = document.createElement("input");
+            inp.type = "file";
+            inp.classList.add("drop-zone__input");
+            inp.name = `picture${pictureID}`;
+            let btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-close");
+            btn.addEventListener("click", () => {
+                galleryContainer.removeChild(document.getElementById(contDiv.id));
+                pictureID--;
+            })
+            pictureID++;
+            //span.appendChild(inp);
+            //span.appendChild(btn);
+            let feedb = document.createElement("div");
+            feedb.classList.add("valid-feedback");
+            feedb.innerText = "Looks good";
+            mainDiv.appendChild(span);
+            mainDiv.appendChild(inp);
+            mainDiv.appendChild(feedb);
+            contDiv.appendChild(mainDiv);
+            contDiv.appendChild(btn);
+            galleryContainer.appendChild(contDiv);
+
+
+            document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+                const dropZoneElement = inputElement.closest(".drop-zone");
+                dropZoneElement.addEventListener("click", (e) => {
+                    inputElement.click();
+                });
+                inputElement.addEventListener("change", (e) => {
+                    if (inputElement.files.length) {
+                        updateThumbnail(dropZoneElement, inputElement.files[0]);
+                    }
+                });
+                dropZoneElement.addEventListener("dragover", (e) => {
+                    e.preventDefault();
+                    dropZoneElement.classList.add("drop-zone--over");
+                });
+                ["dragleave", "dragend"].forEach((type) => {
+                    dropZoneElement.addEventListener(type, (e) => {
+                        dropZoneElement.classList.remove("drop-zone--over");
+                    });
+                });
+                dropZoneElement.addEventListener("drop", (e) => {
+                    e.preventDefault();
+                    if (e.dataTransfer.files.length) {
+                        inputElement.files = e.dataTransfer.files;
+                        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+                    }
+                    dropZoneElement.classList.remove("drop-zone--over");
+                });
+            });
+
+            /**
+             * Updates the thumbnail on a drop zone element.
+             *
+             * @@param {HTMLElement} dropZoneElement
+             * @@param {File} file
+             */
+            function updateThumbnail(dropZoneElement, file) {
+                let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+                // First time - remove the prompt
+                if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+                    dropZoneElement.querySelector(".drop-zone__prompt").remove();
+                }
+
+                // First time - there is no thumbnail element, so lets create it
+                if (!thumbnailElement) {
+                    thumbnailElement = document.createElement("div");
+                    thumbnailElement.classList.add("drop-zone__thumb");
+                    dropZoneElement.appendChild(thumbnailElement);
+                }
+
+                thumbnailElement.dataset.label = file.name;
+
+                // Show thumbnail for image files
+                if (file.type.startsWith("image/")) {
+                    const reader = new FileReader();
+
+                    reader.readAsDataURL(file);
+                    reader.onload = () => {
+                        thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+                    };
+                } else {
+                    thumbnailElement.style.backgroundImage = null;
+                }
+            }
+
+        })
+
+        function toggleClassOpacity(e){
+            $(`#${e.target.name}`).toggleClass("opacity-25")
+        }
+
+
+                //})
+    </script>
 }

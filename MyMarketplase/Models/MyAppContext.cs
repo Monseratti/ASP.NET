@@ -21,5 +21,25 @@ namespace MyMarketplase.Models
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder db)
+        {
+            db.Entity<Role>().HasData(
+                new Role()
+                {
+                    Id= 1,
+                    Name = "admin"
+                },
+                new Role()
+                {
+                    Id= 2,
+                    Name = "user"
+                }
+                );
+            db.Entity<User>().HasData(
+                new User() { Id=1, Name = "admin", Password = "admin", RoleID = 1, Email = "noadminemail@hasnoemail.com" }
+                );
+        }
     }
+
 }

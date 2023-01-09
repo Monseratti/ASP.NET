@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +19,7 @@ namespace MyMarketplase.Controllers
         // GET: Nomenclatures
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Nomenclatures.ToListAsync());
+            return View(await _context.Nomenclatures.ToListAsync());
         }
 
         // GET: Nomenclatures/Details/5
@@ -41,13 +36,14 @@ namespace MyMarketplase.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["Images"] = await _context.FilesPaths.Where(f=>f.NomID.Equals(id)).ToListAsync();
             return View(nomenclature);
         }
 
         // GET: Nomenclatures/Create
         public IActionResult Create()
         {
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
 
@@ -62,6 +58,27 @@ namespace MyMarketplase.Controllers
             {
                 _context.Add(nomenclature);
                 await _context.SaveChangesAsync();
+
+                var files = Request.Form.Files;
+
+                for (int i = 0; i < files.Count; i++)
+                {
+                    var File = new FilesPath();
+                    File.NomID = _context.Nomenclatures.Where(n=>n.Name.Equals(nomenclature.Name)
+                                                                &&n.Description.Equals(nomenclature.Description)
+                                                                &&n.CategoryID.Equals(nomenclature.CategoryID)).FirstOrDefault()!.Id;
+                    var galleryDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\Files\{nomenclature!.Name.Replace(" ", "_")}\Gallery";
+                    Directory.CreateDirectory(galleryDir);
+                    File.Path = $@"{galleryDir}\{files[i].FileName.Replace(" ", "_")}";
+                    using (FileStream fs = new FileStream(File.Path, FileMode.Create))
+                    {
+                        await files[i].CopyToAsync(fs);
+                    }
+                    File.Path = $@"{galleryDir}\{files[i].FileName.Replace(" ", "_")}".Split("wwwroot")[1];
+                    _context.FilesPaths.Add(File);
+                    await _context.SaveChangesAsync();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             return View(nomenclature);
@@ -75,12 +92,14 @@ namespace MyMarketplase.Controllers
                 return NotFound();
             }
 
-            var nomenclature = await _context.Nomenclatures.FindAsync(id);
-            if (nomenclature == null)
-            {
-                return NotFound();
-            }
-            return View(nomenclature);
+                ViewData["CategoryID"] = new SelectList(_context.Categories, "Id", "Name");
+                var nomenclature = await _context.Nomenclatures.FindAsync(id);
+                if (nomenclature == null)
+                {
+                    return NotFound();
+                }
+                ViewData["Images"] = await _context.FilesPaths.Where(f => f.NomID.Equals(id)).ToListAsync();
+                return View(nomenclature);
         }
 
         // POST: Nomenclatures/Edit/5
@@ -99,8 +118,48 @@ namespace MyMarketplase.Controllers
             {
                 try
                 {
-                    _context.Update(nomenclature);
-                    await _context.SaveChangesAsync();
+                    var oldNom = await _context.Nomenclatures.AsNoTracking().FirstAsync(o=>o.Id.Equals(id));
+                    var files = Request.Form.Files;
+                    if (files.Count> 0)
+                    {
+                        var oldFile = await _context.FilesPaths.Where(f=>f.NomID.Equals(id)).ToListAsync();
+                        foreach (var item in oldFile)
+                        {
+                            using (FileStream fs = new FileStream($@"{Directory.GetCurrentDirectory()}\wwwroot\{item.Path}", FileMode.Truncate))
+                            {
+                                await fs.FlushAsync();
+                            }
+                        }
+                        _context.FilesPaths.RemoveRange(oldFile);
+                        await _context.SaveChangesAsync();
+
+                        _context.Update(nomenclature);
+                        await _context.SaveChangesAsync();
+
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                            try
+                            {
+                                var File = new FilesPath();
+                                File.NomID = id;
+                                var galleryDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\Files\{nomenclature!.Name.Replace(" ", "_")}\Gallery";
+                                Directory.CreateDirectory(galleryDir);
+                                File.Path = $@"{galleryDir}\{files[i].FileName}";
+                                using (FileStream fs = new FileStream(File.Path, FileMode.Create))
+                                {
+                                    await files[i].CopyToAsync(fs);
+                                }
+                                File.Path = $@"{galleryDir}\{files[i].FileName}".Split("wwwroot")[1];
+                                _context.FilesPaths.Add(File);
+                                await _context.SaveChangesAsync();
+                            }
+                            catch (Exception)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,6 +176,10 @@ namespace MyMarketplase.Controllers
             }
             return View(nomenclature);
         }
+
+        #region csc
+
+        #endregion
 
         // GET: Nomenclatures/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -150,14 +213,14 @@ namespace MyMarketplase.Controllers
             {
                 _context.Nomenclatures.Remove(nomenclature);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool NomenclatureExists(int id)
         {
-          return _context.Nomenclatures.Any(e => e.Id == id);
+            return _context.Nomenclatures.Any(e => e.Id == id);
         }
     }
 }

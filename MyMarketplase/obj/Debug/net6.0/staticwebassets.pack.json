@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets\\MyMarketplase.bundle.scp.css"
     },
     {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MyFirstBook\\Gallery\\photo_2021-09-29_17-58-11.jpg",
+      "PackagePath": "staticwebassets\\Files\\MyFirstBook\\Gallery\\photo_2021-09-29_17-58-11.jpg"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MyFirstBook\\Gallery\\Взаимодействие систем Виконда-Миропласт .png",
+      "PackagePath": "staticwebassets\\Files\\MyFirstBook\\Gallery\\Взаимодействие систем Виконда-Миропласт .png"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MySecondBook\\Gallery\\Взаимодействие_систем_Виконда-Миропласт_.png",
+      "PackagePath": "staticwebassets\\Files\\MySecondBook\\Gallery\\Взаимодействие_систем_Виконда-Миропласт_.png"
+    },
+    {
       "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

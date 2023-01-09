@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,91 +9,85 @@ using MyMarketplase.Models;
 
 namespace MyMarketplase.Controllers
 {
-    [Authorize (Roles ="admin")]
-    public class UsersController : Controller
+    public class RolesController : Controller
     {
         private readonly MyAppContext _context;
 
-        public UsersController(MyAppContext context)
+        public RolesController(MyAppContext context)
         {
             _context = context;
         }
 
-        // GET: Users
+        // GET: Roles
         public async Task<IActionResult> Index()
         {
-            var myAppContext = _context.Users.Include(u => u.Role);
-            return View(await myAppContext.ToListAsync());
+              return View(await _context.Roles.ToListAsync());
         }
 
-        // GET: Users/Details/5
+        // GET: Roles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Roles == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .Include(u => u.Role)
+            var role = await _context.Roles
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (role == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(role);
         }
 
-        // GET: Users/Create
+        // GET: Roles/Create
         public IActionResult Create()
         {
-            ViewData["RoleID"] = new SelectList(_context.Roles, "Id", "Name");
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Roles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,Password,RoleID")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Role role)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(role);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleID"] = new SelectList(_context.Roles, "Id", "Name", user.RoleID);
-            return View(user);
+            return View(role);
         }
 
-        // GET: Users/Edit/5
+        // GET: Roles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Roles == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var role = await _context.Roles.FindAsync(id);
+            if (role == null)
             {
                 return NotFound();
             }
-            ViewData["RoleID"] = new SelectList(_context.Roles, "Id", "Name", user.RoleID);
-            return View(user);
+            return View(role);
         }
 
-        // POST: Users/Edit/5
+        // POST: Roles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Password,RoleID")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Role role)
         {
-            if (id != user.Id)
+            if (id != role.Id)
             {
                 return NotFound();
             }
@@ -103,12 +96,12 @@ namespace MyMarketplase.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(role);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!RoleExists(role.Id))
                     {
                         return NotFound();
                     }
@@ -119,51 +112,49 @@ namespace MyMarketplase.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleID"] = new SelectList(_context.Roles, "Id", "Name", user.RoleID);
-            return View(user);
+            return View(role);
         }
 
-        // GET: Users/Delete/5
+        // GET: Roles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Roles == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .Include(u => u.Role)
+            var role = await _context.Roles
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (role == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(role);
         }
 
-        // POST: Users/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Users == null)
+            if (_context.Roles == null)
             {
-                return Problem("Entity set 'MyAppContext.Users'  is null.");
+                return Problem("Entity set 'MyAppContext.Roles'  is null.");
             }
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
+            var role = await _context.Roles.FindAsync(id);
+            if (role != null)
             {
-                _context.Users.Remove(user);
+                _context.Roles.Remove(role);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool RoleExists(int id)
         {
-          return _context.Users.Any(e => e.Id == id);
+          return _context.Roles.Any(e => e.Id == id);
         }
     }
 }
