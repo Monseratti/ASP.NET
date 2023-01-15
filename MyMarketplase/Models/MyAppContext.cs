@@ -27,17 +27,26 @@ namespace MyMarketplase.Models
             db.Entity<Role>().HasData(
                 new Role()
                 {
-                    Id= 1,
+                    Id = 1,
                     Name = "admin"
                 },
                 new Role()
                 {
-                    Id= 2,
+                    Id = 2,
                     Name = "user"
                 }
                 );
             db.Entity<User>().HasData(
-                new User() { Id=1, Name = "admin", Password = "admin", RoleID = 1, Email = "noadminemail@hasnoemail.com" }
+                new User() { Id = 1, Name = "admin", Password = "admin", RoleID = 1, Email = "noadminemail@hasnoemail.com" }
+                );
+            db.Entity<Warehouse>().HasData(
+                new Warehouse() { Id = 1, Name = "FirstWarehouse" }
+                );
+            db.Entity<OrderState>().HasData(
+                new OrderState() { Id = 1, Name = "New order" },
+                new OrderState() { Id = 2, Name = "Complicated" },
+                new OrderState() { Id = 3, Name = "Delivered" },
+                new OrderState() { Id = 4, Name = "Done" }
                 );
         }
     }

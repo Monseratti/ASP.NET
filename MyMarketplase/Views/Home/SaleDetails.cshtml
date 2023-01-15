@@ -1,0 +1,57 @@
+﻿@model MyMarketplase.Models.Nomenclature
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+<div>
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
+    <hr />
+    <dl class="row">
+        @if (ViewBag.Images.Count != 0)
+        {
+            <div class="row">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide col-sm-4" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < ViewBag.Images.Count; i++)
+                        {
+                            <div class="carousel-item  @(i==0?"active":"")">
+                                <img src=@ViewBag.Images[i].Path class="d-block w-100" alt="none">
+                            </div>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        }
+        
+        <dt class="col-sm-2">
+            <b>Price:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.NomPrice
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+    <div class="col-sm-6">
+        <form class="d-flex">
+            <input value="@Model.Id" name="nomID" hidden />
+            <input type="number" value="1" min="1" id="@Model.Id" name="nomAmount" />
+            <button onclick="ToCart(@Model.Id)" type="button" class="btn btn-outline-success">Buy</button>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

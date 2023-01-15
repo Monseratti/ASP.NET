@@ -1,0 +1,117 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    decimal totalValue=0m;
+}
+@model Dictionary<Nomenclature,int>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>  Nomenclature </th>
+            <th>  Amount       </th>   
+            <th>  Price        </th>
+            <th>  Total        </th>
+            <th>               </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var price = (ViewBag.Prices as List<WarehouseNomenclature>)!.
+                        Where(w => w.NomID.Equals(item.Key.Id)).Last().NomPrice;
+            totalValue += item.Value * price;
+            var itemPrice = $"itemPrice{item.Key.Id}";
+            var itemTotal = $"itemTotal{item.Key.Id}";
+            var deleteItem = $"deleteItem{item.Key.Id}";
+            <tr>
+                <td>  @Html.DisplayFor(modelItem=>item.Key.Name)    </td>
+                <td>  <input type="number" onchange="ChangeCart(@item.Key.Id)" id="@item.Key.Id" min="1" value="@item.Value" />  </td>
+                <td >
+                    <b id="@itemPrice">@price</b>
+                </td>
+                <td>  <b id="@itemTotal">@(item.Value * price) </b></td>
+                <td> <button type="button" id="@deleteItem" onclick="deleteItem(@item.Key.Id)" class="btn btn-outline-danger">Delete</button></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b><i id="totalValue">@totalValue</i></b></td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+<form class="row" method="post" asp-action="Create" asp-controller="OrderNomenclatures">
+    <div class="col-8"></div>
+    <button id="applyOrder" class="btn btn-success col-4">Apply order</button>
+</form>
+@section Scripts{
+    <script>
+        function ChangeCart(id){
+            var amount = +document.getElementById(id).value;
+            var obj = { Id: id, Amount: amount };
+            var userName = document.getElementById("userLabelName").innerText;
+            var cart = getCookie(`cart${userName}`);
+            if (cart != undefined) {
+                cart = JSON.parse(cart);
+            }
+            else {
+                cart = [];
+            }
+            var fIndex = cart.findIndex(o => o.Id == id);
+            if (fIndex != -1) {
+                cart.splice(fIndex, 1);
+            }
+            cart.push(obj);
+            var str = JSON.stringify(cart);
+            setCookie(`cart${userName}`, str, { "max-age": 3600 * 3 });
+
+            var price = document.getElementById(`itemPrice${id}`);
+            var itemTotal = document.getElementById(`itemTotal${id}`);
+            var total = document.getElementById(`totalValue`);
+            var totalAmount = document.getElementById(`totalAmount`);
+            total.innerText = parseFloat(total.innerText) - parseFloat(itemTotal.innerText);
+            itemTotal.innerText = amount * parseFloat(price.innerText);
+            total.innerText = parseFloat(total.innerText) + parseFloat(itemTotal.innerText);
+        }
+
+        function deleteItem(id) {
+            var btn = document.getElementById(`deleteItem${id}`);
+
+            var itemTotal = document.getElementById(`itemTotal${id}`);
+            var total = document.getElementById(`totalValue`);
+            total.innerText = parseFloat(total.innerText) - parseFloat(itemTotal.innerText);
+
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+
+            var userName = document.getElementById("userLabelName").innerText;
+            var cart = getCookie(`cart${userName}`);
+            if (cart != undefined) {
+                cart = JSON.parse(cart);
+            }
+            var fIndex = cart.findIndex(o => o.Id == id);
+            if (fIndex != -1) {
+                cart.splice(fIndex, 1);
+            }
+            if(cart.length==0){
+                deleteCookie(`cart${userName}`);
+                window.location.href = "/Home/EmptyCart";
+            }
+            else{
+                var str = JSON.stringify(cart);
+                setCookie(`cart${userName}`, str, { "max-age": 3600 * 3 });
+            }
+            checkCartCount();
+        }
+
+        document.getElementById("applyOrder").addEventListener("click",()=>{
+            var userName = document.getElementById("userLabelName").innerText;
+            deleteCookie(`cart${userName}`);
+        })
+    </script>
+}

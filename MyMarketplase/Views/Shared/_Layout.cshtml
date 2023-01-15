@@ -34,7 +34,7 @@
                                 {
                                     foreach (var cat in ViewData["ListOfCategories"] as List<Category>)
                                     {
-                                        <li><a class="dropdown-item" >@cat.Name</a></li>
+                                        <li><a class="dropdown-item" asp-action="IndexCat" asp-controller="Home" asp-route-id="@cat.Id">@cat.Name</a></li>
                                     }
                                 }
                             </ul>
@@ -67,10 +67,17 @@
                     else
                     {
                         <form method="post" asp-controller="Home" asp-action="Logout">
-                            <label class="ms-3 me-3">@User.Identity.Name</label>
+                            <label id="userLabelName" class="ms-3 me-3">@User.Identity.Name</label>
                             <button class="btn btn-danger" id="logout">Log Out</button>
                         </form>
                     }
+                    <form class="ms-3" method="post" asp-controller="Home" asp-action="ToCart">
+                        <button class="btn btn-outline-warning" id="logout">Cart</button>
+                    </form>
+                    <div id="addToCard" style="background-color:lightgreen; width:20px; height:20px; 
+                                        border-radius:50%;visibility:collapse">
+                        +1
+                    </div>
                 </div>
             </div>
         </nav>
@@ -92,6 +99,85 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        // Cookie accessor
+        function setCookie(name, value, options = {}) {
+            options = {
+                path: "/",
+                // при необходимости добавьте другие значения по умолчанию
+                ...options,
+            };
+
+            if (options.expires instanceof Date) {
+                options.expires = options.expires.toUTCString();
+            }
+
+            let updatedCookie =
+                encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+            for (let optionKey in options) {
+                updatedCookie += "; " + optionKey;
+                let optionValue = options[optionKey];
+                if (optionValue !== true) {
+                    updatedCookie += "=" + optionValue;
+                }
+            }
+            document.cookie = updatedCookie;
+        }
+
+        function getCookie(name) {
+            let matches = document.cookie.match(
+                new RegExp(
+                    "(?:^|; )" +
+                    name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+                    "=([^;]*)"
+                )
+            );
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+        function deleteCookie(name) {
+            setCookie(name, "", {
+                "max-age": -1,
+            });
+        }
+        // end Cookie accessor
+        function ToCart(id) {
+            var amount = +document.getElementById(id).value;
+            var obj = { Id: id, Amount: amount };
+            var userName = document.getElementById("userLabelName").innerText;
+            var cart = getCookie(`cart${userName}`);
+            if (cart != undefined) {
+                cart = JSON.parse(cart);
+            }
+            else {
+                cart = [];
+            }
+            var fIndex = cart.findIndex(o => o.Id == id);
+            if (fIndex != -1) {
+                obj.Amount += cart[fIndex].Amount;
+                cart.splice(fIndex, 1);
+            }
+            cart.push(obj);
+            var str = JSON.stringify(cart);
+            setCookie(`cart${userName}`, str, { "max-age": 3600 * 3 });
+            document.getElementById("addToCard").innerText = `+${cart.length}`;
+            document.getElementById("addToCard").style.visibility = "visible";
+        }
+        document.addEventListener("DOMContentLoaded",()=>{
+            checkCartCount();
+        })
+
+        function checkCartCount(){
+            var userName = document.getElementById("userLabelName").innerText;
+            var cart = getCookie(`cart${userName}`);
+            if (cart != undefined) {
+                cart = JSON.parse(cart);
+                document.getElementById("addToCard").innerText = `+${cart.length}`;
+                document.getElementById("addToCard").style.visibility = "visible";
+            }
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

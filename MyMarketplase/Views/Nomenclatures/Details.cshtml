@@ -25,16 +25,7 @@
         @if (ViewBag.Images.Count != 0)
         {
             <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    @for (int i = 0; i < ViewBag.Images.Count; i++)
-                    {
-                        <button type="button" data-bs-target="#carouselExampleDark" 
-                            data-bs-slide-to="0" 
-                            class=@(i==0?"active":"") aria-current=@(i==0?"true":"")>
-                        </button>
-                    }
-                </div>
-                <div class="carousel-inner align-items-center justify-content-center">
+                <div class="carousel-inner">
                     @for (int i = 0; i < ViewBag.Images.Count; i++)
                     {
                         <div class="carousel-item  @(i==0?"active":"")">

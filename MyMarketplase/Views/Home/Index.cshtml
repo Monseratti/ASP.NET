@@ -1,3 +1,64 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model List<Nomenclature>
+    <style>
+        div{
+            border: solid,1px,black;
+        }
+    </style>
+
+    <div class="row">
+        @foreach(Nomenclature nom in Model)
+        {
+            <div class="card col-3 me-3" style="width: 18rem;" name="card">
+            @try
+             {
+                 <img src=@((ViewBag.Images as List<FilesPath>).Where(f=>f.NomID.Equals(nom.Id)).First().Path) class="card-img-top" alt="none">
+             }
+            catch (Exception)
+             {
+             }
+                <div class="card-body">
+                    <h5 class="card-title">@nom.Name</h5>
+                    <p class="card-text">
+             
+                        <div>
+                            @try{
+                            @nom.Description.Remove(38)
+
+                        }
+                        catch (Exception)
+                        {
+                            @nom.Description
+                        }
+                    </div>
+                   </p>
+
+               @try
+                {
+                    <div class="text-black">Prise: @((ViewBag.WarehouseNoms as List<WarehouseNomenclature>).Where(f => f.NomID.Equals(nom.Id)).Last().NomPrice) 
+                            </div>
+                }
+                catch (Exception)
+                {
+                }
+
+                    <form class="d-flex">
+                        <a class="btn btn-info m-1" asp-controller="Home" asp-action="SaleDetails" asp-route-id="@nom.Id">Detail</a>
+                        <input class="w-25" type="number" value="1" min="1" name="nomAmount" id="@nom.Id" />
+                        <button type="button" onclick="ToCart(@nom.Id)" class="btn btn-outline-success">Buy</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+
+@section Scripts{
+    <script>
+        document.getElementsByName("card").forEach(element =>
+            element.addEventListener("mouseenter", (e) => {e.target.style.borderColor="red"}))
+        document.getElementsByName("card").forEach(element =>
+            element.addEventListener("mouseleave", (e) => { e.target.style.borderColor = "rgba(0,0,0,.125)" }))
+    </script>
+}

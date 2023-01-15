@@ -133,8 +133,7 @@ namespace MyMarketplase.Controllers
                         _context.FilesPaths.RemoveRange(oldFile);
                         await _context.SaveChangesAsync();
 
-                        _context.Update(nomenclature);
-                        await _context.SaveChangesAsync();
+                        
 
                         for (int i = 0; i < files.Count; i++)
                         {
@@ -159,7 +158,8 @@ namespace MyMarketplase.Controllers
                             }
                         }
                     }
-                    
+                    _context.Update(nomenclature);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -211,6 +211,8 @@ namespace MyMarketplase.Controllers
             var nomenclature = await _context.Nomenclatures.FindAsync(id);
             if (nomenclature != null)
             {
+                _context.FilesPaths.RemoveRange(_context.FilesPaths.AsNoTracking().Where(f=>f.NomID.Equals(id)).ToList());
+                _context.WarehouseNoms.RemoveRange(_context.WarehouseNoms.AsNoTracking().Where(f=>f.NomID.Equals(id)).ToList());
                 _context.Nomenclatures.Remove(nomenclature);
             }
 

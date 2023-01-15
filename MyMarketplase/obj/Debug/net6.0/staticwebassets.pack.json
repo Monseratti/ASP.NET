@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\MyMarketplase.bundle.scp.css"
     },
     {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MyFirstBook\\Gallery\\51327_P51327_1409181714021.jpg",
+      "PackagePath": "staticwebassets\\Files\\MyFirstBook\\Gallery\\51327_P51327_1409181714021.jpg"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MyFirstBook\\Gallery\\59786_119146.jpg",
+      "PackagePath": "staticwebassets\\Files\\MyFirstBook\\Gallery\\59786_119146.jpg"
+    },
+    {
       "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MyFirstBook\\Gallery\\photo_2021-09-29_17-58-11.jpg",
       "PackagePath": "staticwebassets\\Files\\MyFirstBook\\Gallery\\photo_2021-09-29_17-58-11.jpg"
     },
@@ -13,8 +21,28 @@
       "PackagePath": "staticwebassets\\Files\\MyFirstBook\\Gallery\\Взаимодействие систем Виконда-Миропласт .png"
     },
     {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MySecondBook\\Gallery\\education-study-books-high-school-university-16383080.jpg",
+      "PackagePath": "staticwebassets\\Files\\MySecondBook\\Gallery\\education-study-books-high-school-university-16383080.jpg"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MySecondBook\\Gallery\\life-inspiration-motivation-books-stack-life-inspiration-motivation-books-stack-113843644.jpg",
+      "PackagePath": "staticwebassets\\Files\\MySecondBook\\Gallery\\life-inspiration-motivation-books-stack-life-inspiration-motivation-books-stack-113843644.jpg"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MySecondBook\\Gallery\\photo_2021-09-29_17-58-11.jpg",
+      "PackagePath": "staticwebassets\\Files\\MySecondBook\\Gallery\\photo_2021-09-29_17-58-11.jpg"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MySecondBook\\Gallery\\Взаимодействие_систем_Виконда-Миропласт.png",
+      "PackagePath": "staticwebassets\\Files\\MySecondBook\\Gallery\\Взаимодействие_систем_Виконда-Миропласт.png"
+    },
+    {
       "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MySecondBook\\Gallery\\Взаимодействие_систем_Виконда-Миропласт_.png",
       "PackagePath": "staticwebassets\\Files\\MySecondBook\\Gallery\\Взаимодействие_систем_Виконда-Миропласт_.png"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\Files\\MyThirdBook\\Gallery\\photo_2021-09-29_17-58-11.jpg",
+      "PackagePath": "staticwebassets\\Files\\MyThirdBook\\Gallery\\photo_2021-09-29_17-58-11.jpg"
     },
     {
       "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\css\\site.css",
@@ -23,6 +51,10 @@
     {
       "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\js\\preview.png",
+      "PackagePath": "staticwebassets\\js\\preview.png"
     },
     {
       "Id": "D:\\Studies\\ASP.NET\\MyMarketplase\\wwwroot\\js\\site.js",

@@ -1,0 +1,46 @@
+﻿@model MyMarketplase.Models.WarehouseNomenclature
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>WarehouseNomenclature</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="WarehouseID" class="control-label"></label>
+                <select asp-for="WarehouseID" class ="form-control" asp-items="ViewBag.WarehouseID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomID" class="control-label"></label>
+                <select asp-for="NomID" class="form-control" asp-items="ViewBag.NomID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomAmount" class="control-label"></label>
+                <input asp-for="NomAmount" class="form-control" />
+                <span asp-validation-for="NomAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomPrice" class="control-label"></label>
+                <input asp-for="NomPrice" class="form-control" />
+                <span asp-validation-for="NomPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

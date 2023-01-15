@@ -28,7 +28,20 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                
+                    @try
+                    {
+                        <div>
+                            @item.Description.Remove(38) ...
+                        </div>
+                    }
+                    catch (Exception)
+                    {
+                        <div>
+                            @item.Description;
+                        </div>
+                    }
+                
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
